@@ -1,40 +1,24 @@
 #include <ncurses.h>
 
 int main (int argc, char** argv){
-    
-    
     // Initializes screen
     // Sets up memory and clears the screen
     initscr();
     
-    int x = 10;
-    int y = 10;
+    int height, width, start_y, start_x;
+    height = 10;
+    width = 20;
+    start_x = start_y = 10;
     
-    // Moves cursor to specifiec location
-    move(y, x);
-    
-    // Prints a string (const char *) to a window
-    printw("Hello world!");
-    
-    // Refreshes screen to match what's in memory
+    WINDOW* win = newwin(height, width, start_y, start_x);
     refresh();
+    
+    box(win, 0, 0);
+    mvwprintw(win,1,1,"box");
+    wrefresh(win);
     
     // Waits for user input, returns int value of that key
-    int ch = getch();
-    refresh();
-    
-    // move(0, 0);
-    
-    // Move and print on the same line
-    mvprintw(0, 0, "%d", ch);
-    refresh();
-    
-    getch();
-    
-    // Clears the screen
-    clear();
-    
-    getch();
+    int ch = getch();    
     
     endwin();
     // deallocates memory and ends ncurses
